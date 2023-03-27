@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Niconne&family=Nunito+Sans:wght@300;400&family=Poppins:wght@300;400;500;600&family=Tangerine:wght@700&display=swap');
+
+:root {--color-primary: #375875;
+    --color-primary-light: hsl(242, 91%, 69%, 18%);
+    --color-primary-variant: #5854c7;
+    --color-red: #da0f3f;
+    --color-red-light: hsl(346, 87%, 46%, 15%);
+    --color-green: #00c476;
+    --color-green-light: hsl(156, 100%, 38%, 15%);
+    --color-gray-900: #1c2331;
+    --color-gray-700: #1c2331;
+    --color-gray-300: rgba(242, 242, 254, 0.3);
+    --color-gray-200: #d1d5db;
+    --color-white: #f2f2fe;
+    --color-bg: #687888;
+
+    --transition: all 300ms ease;
+
+    --container-width-lg: 74%;
+    --container-width-md: 88%;
+    --form-width: 40%;
+
+    --card-border-radius-1: 0.3rem;
+    --card-border-radius-2: 0.5rem;
+    --card-border-radius-3: 0.8rem;
+    --card-border-radius-4: 2rem;
+    --card-border-radius-5: 5rem;
+
+    --text-size-title: 1.4rem;
+    --text-size-description: 1.1rem;
+    --text-size-small: 0.9rem;
+
+    --line-height-1: 1.6rem;
+    --line-height-2: 1.2rem;
+}
+
+/* ========================================== General ======================================================*/
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    appearance: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: var(--line-height-1);
+    color: var(--color-gray-200);
+    overflow-x: hidden;
+    background: #f5f5f5;
+    font-size: 0.9rem;
+}
+
+.container {
+    width: var(--container-width-lg);
+    max-width: 1800px;
+    margin-inline: auto;
+}
+
+section {
+    margin-top: 3rem;
+    width: 100vw;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--color-gray-900);
+    line-height: var(--line-height-2);
+}
+
+h1 {
+    font-size: 1.7rem;
+    margin: 1rem 0;
+}
+
+h3 {
+    font-size: 1.1rem;
+    margin: 0.8rem 0 0.5rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+a {
+    color: var( --color-gray-900);
+    transition: var(--transition);
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* ========================================== SUITS & CATEGORY GRID ======================================================*/
+
+.post{
+    z-index: 1000;
+}
+ .posts__container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+ }
+
+
+ /* ========================================== BANNER MAIN ======================================================*/
+.banner__overlay{
+    display: flex;
+    padding: 16px 48px 0!important;
+}
+.content__wrapper{
+    display:flex;
+    margin: 0 auto;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+.banner__side--left{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    line-height: 30px;
+}
+.banner__title{
+    font-size: var(--text-size-title);
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.banner__description{
+    font-size: var(--text-size-description);
+    color: var(--color-gray-700);
+}
+.banner__button--addsuit{
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    font-size: 1.1rem;
+    border: 1px solid var(--color-white);
+}
