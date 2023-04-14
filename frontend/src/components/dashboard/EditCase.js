@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
-import { newCase } from "../../redux/slices/cases";
+import { updateCase } from "../../redux/slices/cases";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -15,19 +16,18 @@ const options = [
         { label: 'Fixed', value: 'fixed' },
         { label: 'Not Issue', value: 'not_bug' },
     ];
-
     
-const AddCase = () => {
+const EditCase = ({single_param}) => {
 
-    const formRef = useRef('');
     const params = useParams();
     const test_suit = params.suitId;
     const dispatch = useDispatch();
+    const [caseUpdated, setCaseUpdated] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const user = useSelector((state) => state.persistedReducer.user.id)
 
-    const add_case = (user, title, description, steps, expected, actual, comments, test_suit, status) => {
+    const editCase = (user, title, description, steps, expected, actual, comments, test_suit, status, item_id) => {
         if(localStorage.getItem('access')){
             const config = {
                 headers: {
@@ -48,13 +48,12 @@ const AddCase = () => {
                 status
             });
             try{
-                axios.post(`${process.env.REACT_APP_API_URL}api/test-cases/`,body,config).then(
+                axios.put(`${process.env.REACT_APP_API_URL}api/test-cases/${item_id}`,body,config).then(
                     response => {
                         if(response.status === 200) {
-                            const itemId = response.data.new_case.id;
                             setLoading(false);
-                            dispatch(newCase({
-                                id: itemId,
+                            dispatch(updateCase({
+                                id: item_id,
                                 user: user,
                                 title: title,
                                 description: description,
@@ -65,7 +64,6 @@ const AddCase = () => {
                                 test_suit: test_suit,
                                 status: status,
                             }))
-                            console.log(itemId);
                         } else {
                             console.log('Suits get fail')
                         }
@@ -78,13 +76,13 @@ const AddCase = () => {
     }
 
   const [formData, setformData] = useState({
-    title : '',
-    description : '',
-    steps: '', 
-    expected: '',
-    actual:'',
-    comments:'',
-    status: '',
+    title : single_param.title,
+    description : single_param.description,
+    steps: single_param.steps, 
+    expected: single_param.expected,
+    actual:single_param.actual,
+    comments:single_param.comments,
+    stats: single_param.stats,
   });
   const {
     title, 
@@ -93,22 +91,22 @@ const AddCase = () => {
     expected,
     actual,
     comments,
-    status,
+    stats,
   } = formData;
 
   const onChange = e => setformData({...formData, [e.target.name] : e.target.value})
   const onSubmit = e => {
     e.preventDefault();
-    add_case(user, title, description, steps, expected, actual, comments, test_suit, status ); 
-    setformData({title:''})
-    setShowModal(false);
+    console.log(single_param.id);
+    editCase(user, title, description, steps, expected, actual, comments, test_suit, stats, single_param.id); 
+    setShowModal(false)
   }
   return (
     <>
-      <button className="p-3 px-4 bg-gray-400 hover:bg-green-200 rounded-lg mr-4 text-white hover:text-black" 
+      <button className="p-2 px-5 bg-gray-400 hover:bg-red-200 rounded-lg mr-4 text-white hover:text-black" 
           type="button" 
           onClick={() => setShowModal(true)}> 
-          Add Case
+          Edit
       </button> 
       {showModal ? (
         <>
@@ -127,7 +125,7 @@ const AddCase = () => {
                         </button>
                     </div>
                     <div classtitle="relative p-6 flex-auto">
-                        <form ref={formRef} onSubmit={(e) => onSubmit(e)}>
+                        <form onSubmit={(e) => onSubmit(e)}>
                             <ModalInput 
                             label="Case Title"
                             name="title"
@@ -169,7 +167,9 @@ const AddCase = () => {
                             value={comments}
                             onChange={e=>onChange(e)}
                             />
-                            <ModalSelect label="Status" name="status" value={status} onChange={e=>onChange(e)} options={options}/>                     
+                            <ModalSelect label="Status" name="stats" value={stats} onChange={e=>onChange(e)} options={options}/>
+
+                     
                             <ModalSubmit className="btn p-2 px-6 bg-gray-200 bg-opacity-50 flex float-right text-black shadow-md rounded hover:bg-green-200" type="submit" onClick={(e) =>onSubmit(e)} >
                             Submit
                             </ModalSubmit>
@@ -184,4 +184,4 @@ const AddCase = () => {
   );
 };
 
-export default AddCase
+export default EditCase

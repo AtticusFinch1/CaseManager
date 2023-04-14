@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout/Layout';
+import Alert from '../../components/Layout/Alert';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -65,7 +66,7 @@ const LoginPage = () => {
                         dispatch(loginSuccess(response.data))
                         setLoading(false);    
                         navigate('/') 
-                        dispatch(load_user())                                  
+                        load_user()                               
                     } else {
                         setLoading(false);
                         dispatch(loginFail(response.data))
@@ -87,9 +88,17 @@ const LoginPage = () => {
 
     const onChange = e => sethtmlFormData({...htmlFormData, [e.target.name] : e.target.value})
     const onSubmit = e => {
-        e.preventDefault();
-        setLoading(true);
+        e.preventDefault();        
         login_user(email, password);   
+        const loggedInUser = localStorage.getItem("access");
+        if (loggedInUser) {      
+        navigate("/")   
+        } else {
+            setLoading(true)       
+            setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+        } 
     };
 
     return (
@@ -137,9 +146,13 @@ const LoginPage = () => {
                         Forget Password?
                     </a>
                     <div className="mt-6">
-                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transhtmlForm bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
-                            Login
-                        </button>
+                        {
+                            loading ? (<Alert className="w-full px-4 py-2 tracking-wide text-black transition-colors duration-200 transhtmlForm bg-red-700 rounded-md " name="Wrong Email or Password"/>) 
+                                : 
+                            (<button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transhtmlForm bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                                Login
+                            </button>) 
+                        }                        
                     </div>
                 </form>
 

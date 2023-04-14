@@ -26,7 +26,7 @@ const Banner = ({image}) => {
               <div className="content__wrapper">
                 <div className="banner__side banner__side--left">
                   <span className="banner__title">Case Manager</span>
-                  <span className="banner__description">We also choose soccer. This is why we've created a platform where our users and other like-minded people can connect with other players, coaches, agents and loyal fans using our smart search tool. Our goal is to unite both beginning and professional soccer players as well as encourage them to register and engage on the platform by sharing skills and achievements with their followers and fans, creating a network unlike any before. Invite your friends to join you on the platform, expand your network and enjoy limitless communication.</span>
+                  <span className="banner__description">Welcome to our Test Case Manager! Our application is designed to help you manage your testing process efficiently and effectively. With our powerful tools and intuitive interface, you can easily create, organize, and execute test cases to ensure that your software meets the highest standards of quality. Whether you're a developer, tester, or quality assurance professional, our Test Case Manager is the perfect solution to streamline your testing process and deliver high-quality software on time and on budget.</span>
                   <AddSuit />
                 </div>
               </div>

@@ -115,7 +115,7 @@ class CaseDetailView(APIView):
             if TestCase.objects.filter(user=user, id=caseId).exists():
                 test_case = TestCase.objects.get(user=user, id=caseId)
                 test_case.delete()
-                return Respone(
+                return Response(
                     {'success':'Tese Case Deleted'},
                     status = status.HTTP_200_OK
                 )

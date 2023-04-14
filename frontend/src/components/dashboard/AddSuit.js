@@ -29,7 +29,7 @@ const AddSuit = () => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const user = useSelector((state) => state.persistedReducer.user.id)
+    const user = useSelector((state) => state.persistedReducer.user?.id)
 
     const add_suit = (user, name, description) => {
         if(localStorage.getItem('access')){

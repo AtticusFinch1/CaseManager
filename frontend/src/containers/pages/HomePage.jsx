@@ -10,7 +10,7 @@ import Layout from "../../components/Layout/Layout";
 
 
 import '../../styles/index.css';
-import image1 from '../../images/img2.png';
+import image1 from '../../images/banner2.png';
 
 const Home = () => {
     const dispatch = useDispatch();

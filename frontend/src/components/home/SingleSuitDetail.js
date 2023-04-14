@@ -1,6 +1,8 @@
 import TableBody from "../tables/TableBody";
 import TableHeader from "../tables/TableHeader";
 import styled from 'styled-components';
+import EditCase from "../dashboard/EditCase";
+import DeleteCase from "../dashboard/DeleteCase";
 
 const TableBodyWrapper = styled.tbody`
   word-wrap: break-word;
@@ -22,9 +24,9 @@ const SingleSuitDetail = ({param}) => {
                                 <TableHeader/>                                  
                                 {
                                     param?.map((item) => (
-                                        <tr key={item.id}>
+                                        <tr key={item?.id}>
                                             <TableCell>
-                                            {item.id}
+                                            {item?.id}
                                             </TableCell>
                                             <TableCell>
                                                 {item.title}
@@ -48,10 +50,10 @@ const SingleSuitDetail = ({param}) => {
                                                 {item.status}
                                             </TableCell>
                                             <TableCell>
-                                                {/* <EditCase single_param={item} /> */}
+                                                <EditCase single_param={item} />
                                             </TableCell>
                                             <TableCell>
-                                                {/* <DeleteCase param={item}/> */}
+                                                <DeleteCase single_param={item}/>
                                             </TableCell>                                
                                         </tr>                                      
                                     ))
